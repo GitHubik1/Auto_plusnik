@@ -22,8 +22,8 @@ class App:
         last_update = get_time()
         while True:
             if get_time() - last_update >= MINUTE:
-                update(CLIENT_ID, CLIENT_SECRET, CLASS_ID)
                 last_update = get_time()
+                update(CLIENT_ID, CLIENT_SECRET, CLASS_ID)
                 Console.log('updated', message_color=Console.GREEN)
 
 if __name__ == '__main__':
