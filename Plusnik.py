@@ -15,7 +15,7 @@ def update(CLIENT_ID, CLIENT_SECRET, CLASS_ID):
         exit(1)
 
     gc  = gspread.service_account('account.json')
-    info_plusnik = gc.open('Плюсник инфо 2021-22')
+    info_plusnik = gc.open('Инфо Силаэдр 2022-23')
     test_page = info_plusnik.worksheet('Test')
 
     responce_ = requests.post(f'https://stepik.org/api/long-tasks?klass={CLASS_ID}&type="class_download_grade_book"', headers={'Authorization': 'Bearer ' + token})
@@ -31,5 +31,6 @@ def update(CLIENT_ID, CLIENT_SECRET, CLASS_ID):
 
     data = pd.read_csv(f'class-{CLASS_ID}-grade-book.csv')
     data = data.fillna('NaN')
+    print(data.head())
     test_page.update([len(data.columns.values.tolist()) * ['', ]] * 70)
     test_page.update([data.columns.values.tolist()] + data.values.tolist())
