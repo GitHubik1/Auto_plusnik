@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Auto plusnik</title>
+        <style>
+            .button {
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 16px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          font-family: 'Open Sans', sans-serif;
+          cursor: pointer;
+        }
+
+        .button1 {
+          background-color: #fcac00;
+          color: black;
+        }
+        .button1:hover {
+            background-color: #ff7319;
+            color: black;
+        }
+            .text-input {
+                width: 25%;
+                height: 10%;
+                resize: none;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            .lol {
+                display: fixed;
+                left: 10px;
+                bottom: 10px;
+                font-family: 'Open Sans', sans-serif;
+                margin-right: 10px;
+            }
+            select {
+                width: 10%;
+                padding: 16px 20px;
+                border: none;
+                border-radius: 4px;
+                background-color: #f1f1f1;
+                font-family: 'Open Sans', sans-serif;
+}
+body {
+  background-color: #fee600;
+  font-family: 'Open Sans', sans-serif;
+}
+img {
+  border-radius: 8px;
+}
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=12PtKL_BNrYBk6qFk8LNqZkcXAG6Lh3_E" type="image/png">
+    </head>
+    <body>
+        <div>
+        <img name="clicker" style="float: right" src="https://internat.msu.ru/media/uploads/2012/03/logo2-128x128.png">
+        <form method="post" class="lol" action="/?class=update">
+            <button name="update_button" onclick="move_forward()" class="button button1">Update</button>
+            <select name="class_select">
+                {% for variant in variants %}
+                    <option value={{ variant }}>{{ variant }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        {{ message }}
+        {% for klass in klasses %}
+        <div>
+            <div style="float: left">
+                <form method="POST" class="lol" action="/?class=upd_{{ klass.name }}">
+                    <input type="text" class="text-input" name="class_update_name" style="width: 24%; " value="{{ klass.name }}">
+                    <input type="text" class="text-input" name="class_update_id" style="width: 24%; " value="{{ klass.id_ }}">
+                    <input type="text" class="text-input" name="class_update_worksheet" style="width: 24%; " value="{{ klass.worksheet }}">
+                    <button name="submit_{{ klass.name }}" onclick="move_forward()" class="button button1" style="width: 20%; ">Save</button>
+                </form>
+                </div>
+                <div style="float: left">
+                <form method="POST" class="lol" action="/?class=del_{{ klass.name }}">
+                    <button name="del" class="button button1" style="width: 100%">Delete</button>
+                </form>
+                </div>
+            </div>
+        {% endfor %}
+        <form method="post" action="?class=new">
+            <div>
+                <button name="new" onclick="move_forward()" class="button button1" style="width: 100%">Add</button>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>
