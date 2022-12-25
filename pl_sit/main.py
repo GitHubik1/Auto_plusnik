@@ -4,16 +4,6 @@ import klasses
 from klasses import CLASS_ID
 
 app = Flask(__name__)
-@app.route('/login/', methods=['GET', 'POST'])
-def amogus():
-    message = 'amogus'
-    if request.method == 'POST':
-        login = request.form.get('login')
-        password = request.form.get('password')
-        if login == 'admin' and password == 1234:
-            message = 'Vanya lox'
-    return render_template('login.html', message='amogus')
-
 @app.route("/", methods=['GET','POST'])
 def index():
     message = ''
